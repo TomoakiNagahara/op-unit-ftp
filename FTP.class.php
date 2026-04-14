@@ -73,4 +73,38 @@ class FTP implements IF_FTP
 		//	...
 		return $this->_connection;
 	}
+
+	/**	Connect only, not login.
+	 *
+	 * @created    2026-04-12
+	 * @param      string     $host
+	 * @param      int        $port
+	 * @param      int        $time
+	 * @param      bool       $ssl
+	 * @return     \FTP\Connection|false
+	 */
+	function Connect( string $host, int $port, int $time, bool $ssl=false ) : \FTP\Connection | false
+	{
+		//	...
+		if( $ssl ){
+			$connection = ftp_ssl_connect($host, $port, $time);
+		}else{
+			$connection = ftp_connect($host, $port, $time);
+		}
+
+		//	...
+		if( $connection ){
+			//	...
+			$pasv = true;
+			if(!$io   = ftp_pasv($connection, $pasv) ){
+				$pasv = false;
+				$io   = ftp_pasv($connection, $pasv);
+			}
+		//	D('pasv', $pasv, $io);
+			unset($io);
+		}
+
+		//	...
+		return $connection;
+	}
 }
