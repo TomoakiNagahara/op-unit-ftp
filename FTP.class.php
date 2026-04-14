@@ -42,4 +42,35 @@ class FTP implements IF_FTP
 	 * @var        \FTP\Connection
 	 */
 	private $_connection;
+
+	/**	Return FTP connection.
+	 *
+	 * @created    2026-04-12
+	 */
+	function Connection( bool $close=false ) : \FTP\Connection | bool
+	{
+		//	...
+		if(!$this->_connection ){
+			//	...
+			$config = OP()->Config('ftp');
+			$host     = $config['host'];
+			$port     = $config['port'] ?? 21;
+			$time     = $config['time'] ?? 10;
+			$username = $config['username'];
+			$password = $config['password'];
+
+			//	...
+			if( $this->_connection = self::Connect($host, $port, $time) ){
+				self::Login($username, $password);
+			}
+		}
+
+		//	FTP connection close process.
+		if( $close ){
+			return ftp_close($this->_connection);
+		}
+
+		//	...
+		return $this->_connection;
+	}
 }
