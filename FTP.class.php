@@ -107,4 +107,22 @@ class FTP implements IF_FTP
 		//	...
 		return $connection;
 	}
+
+	/**	Login after connect.
+	 *
+	 * @created    2026-04-12
+	 * @param      string     $username
+	 * @param      string     $password
+	 * @return     bool
+	 */
+	function Login( string $username, string $password ) : bool
+	{
+		//	...
+		if( $connection = $this->Connection() ){
+			$io = ftp_login($connection, $username, $password);
+		}
+
+		//	...
+		return $io ?? false;
+	}
 }
