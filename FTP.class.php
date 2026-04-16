@@ -35,4 +35,11 @@ class FTP implements IF_FTP
 	 *
 	 */
 	use OP_CORE, OP_CI;
+
+	/**	Connections are isolated for each instance.
+	 *
+	 * @created    2026-04-12
+	 * @var        \FTP\Connection
+	 */
+	private $_connection;
 }
