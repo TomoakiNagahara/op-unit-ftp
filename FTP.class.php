@@ -125,4 +125,14 @@ class FTP implements IF_FTP
 		//	...
 		return $io ?? false;
 	}
+
+	/**	Close connection.
+	 *
+	 * @created    2026-04-12
+	 * @return     bool
+	 */
+	function Close() : bool
+	{
+		return self::Connection(true);
+	}
 }
