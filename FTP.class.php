@@ -25,6 +25,7 @@ use OP\OP_CORE;
 use OP\OP_CI;
 use OP\IF_FTP;
 use OP\IF_FTP_FILE;
+use OP\IF_FTP_DIRECTORY;
 
 /**	FTP
  *
@@ -50,6 +51,13 @@ class FTP implements IF_FTP
 	 * @var        \OP\UNIT\FTP\File
 	 */
 	private $_File;
+
+	/**	Instance are isolated for this instance.
+	 *
+	 * @created    2026-04-12
+	 * @var        \OP\UNIT\FTP\Directory
+	 */
+	private $_Directory;
 
 	/**	Return FTP connection.
 	 *
@@ -162,5 +170,25 @@ class FTP implements IF_FTP
 
 		//	...
 		return $this->_File;
+	}
+
+	/**	Return the Directory instance.
+	 *
+	 */
+	function Directory() : IF_FTP_DIRECTORY
+	{
+		//	...
+		require_once(__DIR__.'/Directory.class.php');
+
+		//	...
+		if(!$this->_Directory ){
+			if( $connection = $this->Connection() ){
+				$this->_Directory = new FTP\Directory();
+				$this->_Directory->Connection($connection);
+			}
+		}
+
+		//	...
+		return $this->_Directory;
 	}
 }
