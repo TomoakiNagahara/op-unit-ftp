@@ -24,6 +24,7 @@ namespace OP\UNIT;
 use OP\OP_CORE;
 use OP\OP_CI;
 use OP\IF_FTP;
+use OP\IF_FTP_FILE;
 
 /**	FTP
  *
@@ -42,6 +43,13 @@ class FTP implements IF_FTP
 	 * @var        \FTP\Connection
 	 */
 	private $_connection;
+
+	/**	Instance are isolated for this instance.
+	 *
+	 * @created    2026-04-12
+	 * @var        \OP\UNIT\FTP\File
+	 */
+	private $_File;
 
 	/**	Return FTP connection.
 	 *
@@ -134,5 +142,25 @@ class FTP implements IF_FTP
 	function Close() : bool
 	{
 		return self::Connection(true);
+	}
+
+	/**	Return the File instance.
+	 *
+	 */
+	function File() : IF_FTP_FILE
+	{
+		//	...
+		require_once(__DIR__.'/File.class.php');
+
+		//	...
+		if(!$this->_File ){
+			if( $connection = $this->Connection() ){
+				$this->_File = new FTP\File();
+				$this->_File->Connection($connection);
+			}
+		}
+
+		//	...
+		return $this->_File;
 	}
 }
