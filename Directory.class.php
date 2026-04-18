@@ -72,4 +72,13 @@ class Directory implements IF_FTP_DIRECTORY
 		//	...
 		return ftp_chdir( $this->_connection, $path );
 	}
+
+	/**	Create directory.
+	 *
+	 */
+	function Create( string $path ) : bool
+	{
+		//	...
+		return ftp_mkdir( $this->_connection, $path ) ? true: false;
+	}
 }
