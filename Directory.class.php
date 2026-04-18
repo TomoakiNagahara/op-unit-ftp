@@ -42,4 +42,14 @@ class Directory implements IF_FTP_DIRECTORY
 	 * @var        \FTP\Connection
 	 */
 	private $_connection;
+
+	/**	This is called when an instancated.
+	 *
+	 * @created    2026-04-18
+	 * @param      \FTP\Connection $connection
+	 */
+	function Connection( \FTP\Connection & $connection )
+	{
+		$this->_connection = $connection;
+	}
 }
