@@ -62,4 +62,14 @@ class Directory implements IF_FTP_DIRECTORY
 		//	...
 		return ftp_pwd( $this->_connection );
 	}
+
+	/**	Change current directory.
+	 *
+	 * @param string $path
+	 */
+	function Change( string $path ) : bool
+	{
+		//	...
+		return ftp_chdir( $this->_connection, $path );
+	}
 }
