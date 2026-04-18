@@ -109,4 +109,15 @@ class File implements IF_FTP_FILE
 		//	...
 		return ftp_get( $this->_connection, $path, $remote );
 	}
+
+	/**	Delete the remote file.
+	 *
+	 * @created    2026-04-18
+	 * @param      string     $path
+	 * @return     bool
+	 */
+	function Delete( string $path ) : bool
+	{
+		return ftp_delete( $this->_connection, $path );
+	}
 }
