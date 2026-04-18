@@ -81,4 +81,13 @@ class Directory implements IF_FTP_DIRECTORY
 		//	...
 		return ftp_mkdir( $this->_connection, $path ) ? true: false;
 	}
+
+	/**	Delete directory.
+	 *
+	 */
+	function Delete( string $path ) : bool
+	{
+		//	...
+		return ftp_rmdir( $this->_connection, $path );
+	}
 }
