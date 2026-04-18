@@ -83,4 +83,17 @@ class File implements IF_FTP_FILE
 		//	...
 		return $list;
 	}
+
+	/**	Put the local file to remote path.
+	 *
+	 * @created    2026-04-18
+	 * @param      string     $path
+	 * @param      string     $remote
+	 * @return     bool
+	 */
+	function Put( string $path, string $remote='' ) : bool
+	{
+		//	...
+		return ftp_put( $this->_connection, $remote, $path );
+	}
 }
