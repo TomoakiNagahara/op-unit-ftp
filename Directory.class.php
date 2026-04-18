@@ -52,4 +52,14 @@ class Directory implements IF_FTP_DIRECTORY
 	{
 		$this->_connection = $connection;
 	}
+
+	/**	Return the current directory.
+	 *
+	 * @return string
+	 */
+	function Current() : string | false
+	{
+		//	...
+		return ftp_pwd( $this->_connection );
+	}
 }
