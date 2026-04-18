@@ -35,4 +35,11 @@ class File implements IF_FTP_FILE
 	 *
 	 */
 	use OP_CORE, OP_CI;
+
+	/**	FTP connected connection.
+	 *
+	 * @created    2026-04-18
+	 * @var        \FTP\Connection
+	 */
+	private $_connection;
 }
