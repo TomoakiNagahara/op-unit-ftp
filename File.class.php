@@ -52,4 +52,35 @@ class File implements IF_FTP_FILE
 	{
 		$this->_connection = $connection;
 	}
+
+	/**	File list.
+	 *
+	 * @created    2026-04-18
+	 * @param      string     $path
+	 * @return     array
+	 */
+	function List( string $path='.' ) : array
+	{
+		//	...
+		$list = [];
+
+		//	...
+		foreach( ftp_nlist($this->_connection, $path) as $name ){
+			$size = ftp_size( $this->_connection, $name );
+			$time = ftp_mdtm( $this->_connection, $name );
+			if( $time !== -1 ){
+				$utc = gmdate('Y-m-d H:i:s', $time);
+			}else{
+				$utc = null;
+			}
+			$list[$name] = [
+				'size' => $size,
+				'time' => $time,
+				'utc'  => $utc,
+			];
+		}
+
+		//	...
+		return $list;
+	}
 }
