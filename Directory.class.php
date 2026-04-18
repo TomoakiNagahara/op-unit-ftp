@@ -35,4 +35,11 @@ class Directory implements IF_FTP_DIRECTORY
 	 *
 	 */
 	use OP_CORE, OP_CI;
+
+	/**	FTP connected connection.
+	 *
+	 * @created    2026-04-18
+	 * @var        \FTP\Connection
+	 */
+	private $_connection;
 }
